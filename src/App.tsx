@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='flex justify-center	 text-6xl'>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -16,12 +16,12 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <p className='text-6xl'>Vite + React</p>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
+        <p className='text-6xl'>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>

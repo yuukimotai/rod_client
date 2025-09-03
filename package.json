@@ -1,0 +1,22 @@
+{
+  "name": "rod_client",
+  "version": "1.0.0",
+  "description": "rod_api向けのクライアント",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuukimotai/rod_client.git"
+  },
+  "author": "yuukimotai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuukimotai/rod_client/issues"
+  },
+  "homepage": "https://github.com/yuukimotai/rod_client#readme",
+  "devDependencies": {
+    "vite": "^7.1.4"
+  }
+}

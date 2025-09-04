@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useCookies } from 'react-cookie';
 
 import AuthRepository from '../../adapters/gateways/AuthRepository.ts'
-import LoginUsecase from '../../usecases/LoginUsecase.ts'
+import LoginUsecase from '../../usecases/CreateAccountUsecase.ts'
+import CreateAccountUseCase from '../../usecases/CreateAccountUsecase.ts';
 
-function Login() {
-    const [cookie, setCookie] = useCookies(["bearer_token"])
+function CreateAccount() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [confirm, setConfirm] = useState<string>("");
 
     const inputEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -15,14 +15,16 @@ function Login() {
     const inputPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
     };
+    const inputConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirm(e.target.value);
+    };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
         const authRepository = new AuthRepository();
-        const loginUsecase = new LoginUsecase(authRepository);
-        const result = await loginUsecase.execute(email, password);
+        const createAccountUsecase = new CreateAccountUseCase(authRepository);
+        const result = await createAccountUsecase.execute(email, password, confirm);
         console.log(result)
         if (result.status === 200) {
-            setCookie("bearer_token", result.jwt)
         }
     };
 
@@ -32,9 +34,11 @@ function Login() {
                     value={email} type='email' className='rounded border border-lime-500 mb-5 text-white'/>
             <input onChange={inputPasswordChange} name="password"
                     value={password} type='password' className='rounded border border-lime-500 mb-14 text-white'/>
+            <input onChange={inputConfirmChange} name="password"
+                    value={confirm} type='password' className='rounded border border-lime-500 mb-14 text-white'/>
             <button type="submit">Login</button>
         </form>
     );
 }
 
-export default Login;
+export default CreateAccount;

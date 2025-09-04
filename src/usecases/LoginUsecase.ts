@@ -1,11 +1,10 @@
-import type { IAuthRepository } from '../domain/repositories/IAuthRepository';
+import type { AuthRepository } from '../domain/repositories/AuthRepository';
 
 class LoginUseCase {
-  constructor(private authRepo: IAuthRepository) {}
+  constructor(private authRepo: AuthRepository) {}
 
   async execute(email: string, password: string): Promise<{ status: number; jwt: string }> {
-    // Repositoryに処理を委譲
-    return await this.authRepo.login(email, password); // 実際はemail/password渡すように修正する
+    return await this.authRepo.login(email, password);
   }
 }
 

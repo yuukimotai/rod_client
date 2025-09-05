@@ -1,6 +1,6 @@
 import type { AuthRepository } from '../domain/repositories/AuthRepository';
 
-class LoginUseCase {
+class LoginUsecase {
   constructor(private authRepo: AuthRepository) {}
 
   async execute(email: string, password: string): Promise<{ status: number; jwt: string }> {
@@ -8,4 +8,4 @@ class LoginUseCase {
   }
 }
 
-export default LoginUseCase;
+export default LoginUsecase;

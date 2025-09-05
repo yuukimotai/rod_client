@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import AuthRepository from '../../adapters/gateways/AuthRepository.ts'
-import LoginUsecase from '../../usecases/CreateAccountUsecase.ts'
-import CreateAccountUseCase from '../../usecases/CreateAccountUsecase.ts';
+import CreateAccountUseCase from '../../usecases/CreateAccountUseCase.ts';
 
 function CreateAccount() {
     const [email, setEmail] = useState<string>("");

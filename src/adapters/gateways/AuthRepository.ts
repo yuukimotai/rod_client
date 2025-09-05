@@ -23,15 +23,27 @@ class HttpAuthRepository implements AuthRepository {
             return { status: 500, jwt: '' };
         }   
     }
-    async logout(): Promise<{ status: number, msg: string }> {
-        console.log('Account creation logic will go here.');
-
-        return Promise.resolve({ status: 200, msg: 'mock-jwt-token' });
+    async logout(jwt: string): Promise<{ status: number}> {
+        try {
+            const response = await httpClient.post('/logout', { jwt });
+            return { status: response.status};
+        } catch (error) {
+            console.error(`${error}: サーバーに接続できませんでした`);
+            return { status: 500};
+        }   
     }
-    async closeAccount(): Promise<{ status: number, msg: string }> {
-        console.log('Account creation logic will go here.');
-
-        return Promise.resolve({ status: 200, msg: 'mock-jwt-token' });
+    async closeAccount(jwt: string, password: string): Promise<{ status: number}> {
+        try {
+                const response = await httpClient.post('/close-account', {password: password},
+                                                                            { headers: {
+                                                                                Authorization: `Bearer ${jwt}`,
+                                                                                "Content-Type": "application/json"}});
+                console.log(response)
+                return { status: response.status };
+        } catch (error) {
+            console.error(`${error}: サーバーに接続できませんでした`);
+            return { status: 500 };
+        }   
     }
 }
 

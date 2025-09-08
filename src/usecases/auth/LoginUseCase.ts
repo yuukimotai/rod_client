@@ -1,4 +1,4 @@
-import type { AuthRepository } from '../domain/repositories/AuthRepository';
+import type { AuthRepository } from '../../domain/repositories/AuthRepository';
 
 class LoginUsecase {
   constructor(private authRepo: AuthRepository) {}

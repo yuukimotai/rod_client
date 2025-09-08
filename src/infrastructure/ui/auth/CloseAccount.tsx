@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import AuthRepository from '../../adapters/gateways/AuthRepository.ts'
-import CloseAccountUseCase from '../../usecases/CloseAccountUseCase.ts';
+import AuthRepository from '../../../adapters/gateways/HttpAuthRepository.ts'
+import CloseAccountUseCase from '../../../usecases/auth/CloseAccountUseCase.ts';
+import User from '../../../domain/entities/User.ts'
 
 function CloseAccount() {
     const [cookies, setCookie, removeCookie] = useCookies(['bearer_token']);
@@ -14,8 +15,13 @@ function CloseAccount() {
         e.preventDefault(); 
         const authRepository = new AuthRepository();
         const closeAccountUseCase = new CloseAccountUseCase(authRepository);
-        const result = await closeAccountUseCase.execute(cookies.bearer_token, password);
+        const user = new User();
+        //念のための型チェック
+        user.password = password;
+        const result = await closeAccountUseCase.execute(cookies.bearer_token, user.password);
         if (result.status === 200) {
+            alert('アカウントを停止しました。ご利用ありがとうございました。');
+            // ログイン画面に戻るナビゲート
         }
     };
 

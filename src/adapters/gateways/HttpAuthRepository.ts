@@ -25,7 +25,8 @@ class HttpAuthRepository implements AuthRepository {
     }
     async logout(jwt: string): Promise<{ status: number}> {
         try {
-            const response = await httpClient.post('/logout', { jwt });
+            const response = await httpClient.post('/logout',
+                { headers:{"Content-Type": "application/json", Authorization: `Bearer ${ jwt }`,}});
             return { status: response.status};
         } catch (error) {
             console.error(`${error}: サーバーに接続できませんでした`);
@@ -34,10 +35,9 @@ class HttpAuthRepository implements AuthRepository {
     }
     async closeAccount(jwt: string, password: string): Promise<{ status: number}> {
         try {
-                const response = await httpClient.post('/close-account', {password: password},
-                                                                            { headers: {
-                                                                                Authorization: `Bearer ${jwt}`,
-                                                                                "Content-Type": "application/json"}});
+                const response = await httpClient.post('/close-account',
+                    { headers: { Authorization: `Bearer ${jwt}`, "Content-Type": "application/json"},
+                      password: password});
                 console.log(response)
                 return { status: response.status };
         } catch (error) {

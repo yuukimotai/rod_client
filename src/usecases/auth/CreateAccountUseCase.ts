@@ -1,4 +1,4 @@
-import type {AuthRepository} from '../domain/repositories/AuthRepository.ts';
+import type {AuthRepository} from '../../domain/repositories/AuthRepository.ts';
 
 class CreateAccountUseCase {
   constructor(private authRepo: AuthRepository) {}

@@ -4,8 +4,10 @@ import EmojiPicker from 'emoji-picker-react';
 import PostRepository from '../../../adapters/gateways/HttpPostRepository.ts'
 import CreatePostUseCase from '../../../usecases/post/CreatePostUseCase.ts';
 import Post from '../../../domain/entities/Post.ts';
+import { useCookies } from 'react-cookie';
 
-function CreatePost() {
+const CreatePost = () => {
+    const [cookie, setCookie] = useCookies(["bearer_token"]);
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [chosedEmoji, setEmoji] = useState();
@@ -33,8 +35,8 @@ function CreatePost() {
         post.title = title;
         post.content = content;
         //post.priority_emoji = emoji;
-        const result = await createPostUsecase.execute(post.title, post.content, "");
-        if (result.status === 200) {
+        const result = await createPostUsecase.execute(cookie.bearer_token, post.title, post.content, "");
+        if (result.status === 201) {
             alert('新しい投稿を作成しました');
         }
     };
@@ -49,7 +51,7 @@ function CreatePost() {
                 <button type="submit">作成</button>
             </form>
             <div>
-                {isShowPicker ? <EmojiPicker />: null}
+                {isShowPicker ? <EmojiPicker className='w-max' />: null}
                 <button onClick={handlePicker}>絵文字選択</button>
             </div>
         </>

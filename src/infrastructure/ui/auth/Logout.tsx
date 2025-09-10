@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import AuthRepository from '../../../adapters/gateways/HttpAuthRepository.ts'
 import LogoutUsecase from '../../../usecases/auth/LogoutUseCase.ts';
 
-function Logout() {
+const Logout = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['bearer_token']);
 
     const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {

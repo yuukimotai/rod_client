@@ -9,5 +9,5 @@ createRoot(document.getElementById('root')!).render(
   <CookiesProvider>
     <BrowserRouter>
       <App />
-    </BrowserRouter>,
+    </BrowserRouter>
   </CookiesProvider>)

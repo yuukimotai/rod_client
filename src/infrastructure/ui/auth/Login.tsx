@@ -5,7 +5,7 @@ import AuthRepository from '../../../adapters/gateways/HttpAuthRepository.ts'
 import LoginUsecase from '../../../usecases/auth/LoginUseCase.ts'
 import User from '../../../domain/entities/User.ts'
 
-function Login() {
+const Login = () => {
     const [cookie, setCookie] = useCookies(["bearer_token"])
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");

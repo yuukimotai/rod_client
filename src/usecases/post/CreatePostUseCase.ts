@@ -3,8 +3,8 @@ import type { PostRepostitory } from "../../domain/repositories/PostRepository";
 class CreatePostUseCase {
     constructor(private postRepo: PostRepostitory){}
 
-    async execute(title: string, content: string, priority_emoji: string): Promise<{status: number; title: string}> {
-        const response = await this.postRepo.createPost(title, content, priority_emoji);
+    async execute(jwt: string, title: string, content: string, priority_emoji: string): Promise<{status: number; title: string}> {
+        const response = await this.postRepo.createPost(jwt, title, content, priority_emoji);
         if (response) {
             return {status: response.status, title: response.data.title}
         } else {

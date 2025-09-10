@@ -4,7 +4,7 @@ import AuthRepository from '../../../adapters/gateways/HttpAuthRepository.ts'
 import CreateAccountUseCase from '../../../usecases/auth/CreateAccountUseCase.ts';
 import User from '../../../domain/entities/User.ts'
 
-function CreateAccount() {
+const CreateAccount = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirm, setConfirm] = useState<string>("");

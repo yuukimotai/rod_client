@@ -3,16 +3,20 @@ import type { PostRepostitory } from "../../domain/repositories/PostRepository";
 import httpClient from "../../infrastructure/adapter/httpClient";
 
 class HttpPostRepository implements PostRepostitory {
-    async createPost(title: string, content: string, priority_emoji: string): Promise<AxiosResponse | undefined> {
+    async createPost(jwt: string, title: string, content: string, priority_emoji: string): Promise<AxiosResponse | undefined> {
         try {
-            return await httpClient.post('/create-post', { title, content, priority_emoji });
+            return await httpClient.post('/posts', { title, content, priority_emoji },
+                                                    { 
+                                                        headers: {"Content-Type": "application/json", Authorization: `Bearer ${jwt}`}
+                                                    }
+            );
         } catch (error) {
             console.error(`${error}: サーバーに接続できませんでした`);
         }     
     }
-    async showPost(postId: number): Promise<AxiosResponse | undefined> {
+    async showPosts(jwt: string): Promise<AxiosResponse | undefined> {
         try {
-            return await httpClient.post('/show-post', { id: postId });
+            return await httpClient.get('/posts', {headers: {"Authorization": `Bearer ${jwt}`}});
         } catch(error) {
             console.error(`${error}: サーバーに接続できませんでした`);
         }

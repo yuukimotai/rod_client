@@ -4,7 +4,7 @@ import AuthRepository from '../../../adapters/gateways/HttpAuthRepository.ts'
 import CloseAccountUseCase from '../../../usecases/auth/CloseAccountUseCase.ts';
 import User from '../../../domain/entities/User.ts'
 
-function CloseAccount() {
+const CloseAccount = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['bearer_token']);
     const [password, setPassword] = useState<string>("");
 

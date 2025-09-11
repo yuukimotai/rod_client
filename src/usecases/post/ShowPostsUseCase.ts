@@ -6,7 +6,6 @@ class ShowPostsUseCase {
 
     async execute(jwt: string): Promise<AxiosResponse | undefined> {
         const response = await this.postRepo.showPosts(jwt);
-        console.log(response)
         if (response) {
             return response;
         } else {

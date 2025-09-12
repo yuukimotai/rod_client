@@ -9,8 +9,8 @@ import PostDetail from "./PostDetail";
 const ShowPosts = () => {
     const [cookie, setCookie] = useCookies(["bearer_token"]);
     const [posts, setPosts] = useState<Post[]>([]);
-    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-    const [viewModal, setViewModal] = useState<boolean>(false);
+    const [selectedPost, setSelectedPost] = useState<Post>(new Post());
+    const [viewDetail, setViewDetail] = useState<boolean>(false);
     const postRepository = new PostRepository();
     const showPostsUseCase = new ShowPostsUseCase(postRepository);
 
@@ -22,8 +22,11 @@ const ShowPosts = () => {
         }
     }
     const selectPost = (post: Post) => {
-        setViewModal(true);
+        setViewDetail(true);
         setSelectedPost(post);
+    }
+    const closeModal =() => {
+        setViewDetail(false);
     }
     useEffect(() => {
         fetchPosts();
@@ -31,15 +34,20 @@ const ShowPosts = () => {
 
     return (
         <>
-            {viewModal && selectedPost ? <PostDetail post={selectedPost} viewModal={viewModal} setViewModal={setViewModal} /> : null }
-            自分の投稿一覧
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.id}>
-                        <h3>{post.title}</h3>
-                        <input type="button" value="詳細" onClick={()=> selectPost(post)} />
-                    </li>
-                ))}
+            <ul className="flex flex-row max-h-96">
+                <li className="w-3/12 overflow-y-scroll">
+                    <ul>
+                        {posts.map((post) => (
+                            <li key={post.id}>
+                                <h3>{post.title}</h3>
+                                <button type="button" value="詳細" onClick={()=> selectPost(post)}>詳細</button>
+                            </li>
+                        ))}
+                    </ul>
+                </li>
+                <li className="w-9/12">
+                    {viewDetail ? (<PostDetail post={selectedPost}/>): (<div>投稿を選択してください</div>)}
+                </li>
             </ul>
         </>
     );

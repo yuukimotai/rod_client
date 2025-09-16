@@ -31,6 +31,8 @@ const ShowPosts = () => {
     useEffect(() => {
         fetchPosts();
     }, []);
+    useEffect(() => {
+    }, [selectedPost]);
 
     return (
         <>
@@ -40,13 +42,13 @@ const ShowPosts = () => {
                         {posts.map((post) => (
                             <li key={post.id}>
                                 <h3>{post.title}</h3>
-                                <button type="button" value="詳細" onClick={()=> selectPost(post)}>詳細</button>
+                                <button type="button" onClick={()=> selectPost(post)}>詳細</button>
                             </li>
                         ))}
                     </ul>
                 </li>
                 <li className="w-9/12">
-                    {viewDetail ? (<PostDetail post={selectedPost}/>): (<div>投稿を選択してください</div>)}
+                    {viewDetail ? (<PostDetail post={selectedPost}/>) : (<div>投稿を選択してください</div>)}
                 </li>
             </ul>
         </>

@@ -2,8 +2,8 @@ import {useState, useRef} from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import { useCookies } from 'react-cookie';
 
-import PostRepository from '../../../adapters/gateways/HttpPostRepository.ts'
-import CreatePostUseCase from '../../../usecases/post/CreatePostUseCase.ts';
+import PostRepository from '../../../adapters/gateways/HttpCommentRepository.ts'
+import CreateCommentUseCase from '../../../usecases/comment/CreateCommentUseCase.ts';
 import Post from '../../../domain/entities/Post.ts';
 
 const CreatePost = () => {
@@ -29,7 +29,7 @@ const CreatePost = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
         const postRepository = new PostRepository();
-        const createPostUsecase = new CreatePostUseCase(postRepository);
+        const createPostUsecase = new CreateCommentUseCase(postRepository);
         const post = new Post();
         //念のための型チェック
         post.title = title;

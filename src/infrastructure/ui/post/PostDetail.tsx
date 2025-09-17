@@ -31,7 +31,8 @@ const PostDetail: React.FC<Props> = ({post}) => {
         const result = await updatePostUseCase.execute(cookie.bearer_token, id, title, content, "");
         
         if (result.status === 200 ) {
-            console.log("更新されました")
+            alert("更新されました")
+            window.location.reload();
         }
     }
     const handleDelete = async () => {
@@ -40,7 +41,8 @@ const PostDetail: React.FC<Props> = ({post}) => {
         const result = await deletePostUseCase.execute(cookie.bearer_token, id);
         
         if (result.status === 204 ) {
-            console.log("削除されました")
+            alert("削除されました")
+            window.location.reload();
         }
     }
     useEffect(()=>{

@@ -20,13 +20,14 @@ const ShowPosts = () => {
             setPosts(result.data as Post[]);
             alert("自分の投稿を読み込みました");
         }
+        if (result?.status !==200) {
+            alert("投稿の読み込みに失敗しました。ログインしてください");
+            window.location.href = "/login";
+        }
     }
     const selectPost = (post: Post) => {
         setViewDetail(true);
         setSelectedPost(post);
-    }
-    const closeModal =() => {
-        setViewDetail(false);
     }
     useEffect(() => {
         fetchPosts();

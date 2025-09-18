@@ -9,6 +9,7 @@ import CloseAccount from './infrastructure/ui/auth/CloseAccount.tsx';
 import CreatePost from './infrastructure/ui/post/CreatePost.tsx';
 import ShowPosts from './infrastructure/ui/post/ShowPosts.tsx';
 import ShowComments from './infrastructure/ui/comment/ShowComments.tsx';
+import SearchPosts from './infrastructure/ui/post/SearchPosts.tsx';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/logout" element={ <Logout /> } />
         <Route path="/create-account" element={ <CreateAccount /> } />
         <Route path="/close-account" element={ <CloseAccount /> } />
+        <Route path="/search-posts" element={ <SearchPosts /> } />
         <Route path="/show-posts" element={ <ShowPosts /> } />
         <Route path="/create-post" element={ <CreatePost /> } />
         <Route path="/show-comments" element={ <ShowComments /> } />
